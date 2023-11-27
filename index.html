@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вопросы ЦК по теории эволюции</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script type="module" src="script.js"></script>
 </head>
 <body>
-    <p>Hello world!</p>
+
+<main>
+    <section id="topic_select_section">
+        <h2>Выберите тему:</h2>
+        <div id="topic_select"></div>
+        <button id="topic_select_accept_button">Выбрать</button>
+    </section>
+    <section id="question_section">
+        <h2>Ответьте на вопрос:</h2>
+        <h3 id="question_text"></h3>
+        <div id="answer_select"></div>
+        <button id="answer_select_button">Ответить</button>
+    </section>
+</main>
+
 </body>
 </html>
