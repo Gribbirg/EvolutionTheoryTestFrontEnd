@@ -6,7 +6,7 @@ let rightAnswerNum = 0;
 
 function addTopic(name, num) {
     document.getElementById("topic_select").innerHTML += `
-        <input type="radio" name="topic_input" id="topic_${num}" ${(num === 0) ? "checked" : ""}><label for="topic_${num}">${num + 1 + ") " + name}</label>
+        <input type="radio" name="topic_input" id="topic_${num}"><label for="topic_${num}">${num + 1 + ") " + name}</label>
         `
 }
 
@@ -21,6 +21,7 @@ function getSelectedTopicInput() {
     for (let i = 0; i < data.length; i++)
         if (document.getElementById(`topic_${i}`).checked)
             return i;
+    return -1;
 }
 
 function hideTopicSelectSection() {
@@ -41,7 +42,7 @@ function showQuestionSection() {
 
 function addAnswer(text, num) {
     document.getElementById("answer_select").innerHTML += `
-    <input type="radio" name="answer_input" id="answer_${num}" ${(num === 0) ? "checked" : ""}><label for="answer_${num}">${num + 1 + ") " + text}</label>
+    <input type="radio" name="answer_input" id="answer_${num}"><label for="answer_${num}">${num + 1 + ") " + text}</label>
     `
 }
 
@@ -69,6 +70,7 @@ function getSelectedAnswerInput() {
     for (let i = 0; i < questions[currentQuestionNum]["answers"].length; i++)
         if (document.getElementById(`answer_${i}`).checked)
             return i;
+    return -1;
 }
 
 function addInputListeners() {
@@ -84,26 +86,25 @@ function addInputListeners() {
     }
 }
 
-hideQuestionSection();
-setTopicData();
-
-document.getElementById("topic_select_accept_button").onclick = function () {
-    let categoryNum = getSelectedTopicInput();
-    hideTopicSelectSection();
-    questions = data[categoryNum].questions.slice();
-    shuffle(questions);
-    currentQuestionNum = 0;
-    setQuestion(questions[currentQuestionNum]);
-    showQuestionSection();
-}
-
-document.getElementById("answer_select_button").onclick = function () {
+function setAnswerButtonAnsState() {
     let ans = getSelectedAnswerInput();
     if (ans === rightAnswerNum) {
-        alert("Правильно!");
+        document.getElementById("question_head").textContent = `Правильно!`;
+        document.getElementById("question_section").style.background = "#d4ffcf";
+    } else if (ans === -1) {
+        alert("Выберите ответ!");
+        return;
     } else {
-        alert(`Неправильно! Правильный ответ под номером ${rightAnswerNum + 1}`)
+        document.getElementById("question_head").textContent = `Неправильно! Правильный ответ под номером ${rightAnswerNum + 1}`;
+        document.getElementById("question_section").style.background = "#ffdad6";
     }
+    document.getElementById(`answer_${rightAnswerNum}`).nextElementSibling.classList.add("right");
+    document.getElementById("answer_select_button").innerHTML = "Следующий<span></span>";
+    document.getElementById("answer_select_button").onclick = setAnswerButtonNextState;
+}
+
+
+function setAnswerButtonNextState() {
     currentQuestionNum++;
     if (currentQuestionNum < questions.length) {
         setQuestion(questions[currentQuestionNum]);
@@ -112,4 +113,27 @@ document.getElementById("answer_select_button").onclick = function () {
         hideQuestionSection();
         showTopicSelectSection();
     }
+    document.getElementById("question_section").style.background = "#dfe4d7";
+    document.getElementById("question_head").textContent = "Выберите правильный ответ:";
+    document.getElementById("answer_select_button").innerHTML = "Ответить<span></span>";
+    document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
 }
+
+hideQuestionSection();
+setTopicData();
+
+document.getElementById("topic_select_accept_button").onclick = function () {
+    let categoryNum = getSelectedTopicInput();
+    if (categoryNum !== -1) {
+        hideTopicSelectSection();
+        questions = data[categoryNum]["questions"].slice();
+        shuffle(questions);
+        currentQuestionNum = 0;
+        setQuestion(questions[currentQuestionNum]);
+        showQuestionSection();
+    } else {
+        alert("Выберите тему!");
+    }
+}
+
+document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
