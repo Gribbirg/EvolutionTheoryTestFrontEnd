@@ -1,0 +1,59 @@
+main {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+section {
+    width: 800px;
+    background: grey;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    /*& * {*/
+    /*    text-align: center;*/
+    /*}*/
+
+    > div {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        width: fit-content;
+
+        > input {
+            display: none;
+        }
+
+        > label {
+            margin: 10px;
+            background: red;
+            padding: 5px 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        > label::before {
+            position: relative;
+            right: 10px;
+        }
+
+    }
+
+    > button {
+        margin: 10px;
+    }
+}
+
+.selected {
+    background: green;
+}
+
+@media (max-width: 850px) {
+    section {
+        width: 95%;
+        > div > label {
+            width: 90%;
+        }
+    }
+}

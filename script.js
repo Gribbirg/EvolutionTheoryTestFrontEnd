@@ -6,7 +6,7 @@ let rightAnswerNum = 0;
 
 function addTopic(name, num) {
     document.getElementById("topic_select").innerHTML += `
-        <input type="radio" name="topic_input" id="topic_${num}" ${(num === 0) ? "checked" : ""}><label for="topic_${num}">${name}</label>
+        <input type="radio" name="topic_input" id="topic_${num}" ${(num === 0) ? "checked" : ""}><label for="topic_${num}">${num + 1 + ") " + name}</label>
         `
 }
 
@@ -14,6 +14,7 @@ function setTopicData() {
     for (let i = 0; i < data.length; i++) {
         addTopic(data[i].name, i);
     }
+    addInputListeners();
 }
 
 function getSelectedTopicInput() {
@@ -27,7 +28,7 @@ function hideTopicSelectSection() {
 }
 
 function showTopicSelectSection() {
-    document.getElementById("topic_select_section").style.display = "initial";
+    document.getElementById("topic_select_section").style.display = "flex";
 }
 
 function hideQuestionSection() {
@@ -35,12 +36,12 @@ function hideQuestionSection() {
 }
 
 function showQuestionSection() {
-    document.getElementById("question_section").style.display = "initial";
+    document.getElementById("question_section").style.display = "flex";
 }
 
 function addAnswer(text, num) {
     document.getElementById("answer_select").innerHTML += `
-    <input type="radio" name="answer_input" id="answer_${num}" ${(num === 0) ? "checked" : ""}><label for="answer_${num}">${text}</label>
+    <input type="radio" name="answer_input" id="answer_${num}" ${(num === 0) ? "checked" : ""}><label for="answer_${num}">${num + 1 + ") " + text}</label>
     `
 }
 
@@ -51,6 +52,7 @@ function setQuestion(question) {
     shuffle(answers);
     for (let i = 0; i < answers.length; i++)
         addAnswer(answers[i], i);
+    addInputListeners();
     rightAnswerNum = answers.findIndex(function (item) {
         return item === question["answers"][0];
     })
@@ -67,6 +69,19 @@ function getSelectedAnswerInput() {
     for (let i = 0; i < questions[currentQuestionNum]["answers"].length; i++)
         if (document.getElementById(`answer_${i}`).checked)
             return i;
+}
+
+function addInputListeners() {
+    for (let label of document.querySelectorAll("label")) {
+        label.onclick = function () {
+            for (let label1 of document.querySelectorAll("label")) {
+                if (label1.classList.contains("selected"))
+                    label1.classList.remove("selected")
+
+            }
+            label.classList.add("selected");
+        }
+    }
 }
 
 hideQuestionSection();
