@@ -86,6 +86,12 @@ function addInputListeners() {
     }
 }
 
+function removeInputListeners() {
+    for (let label of document.querySelectorAll("label")) {
+        label.onclick = null;
+    }
+}
+
 function setAnswerButtonAnsState() {
     let ans = getSelectedAnswerInput();
     if (ans === rightAnswerNum) {
@@ -95,9 +101,10 @@ function setAnswerButtonAnsState() {
         alert("Выберите ответ!");
         return;
     } else {
-        document.getElementById("question_head").textContent = `Неправильно! Правильный ответ под номером ${rightAnswerNum + 1}`;
+        document.getElementById("question_head").textContent = `Неправильно!`;
         document.getElementById("question_section").style.background = "#ffdad6";
     }
+    removeInputListeners();
     document.getElementById(`answer_${rightAnswerNum}`).nextElementSibling.classList.add("right");
     document.getElementById("answer_select_button").innerHTML = "Следующий<span></span>";
     document.getElementById("answer_select_button").onclick = setAnswerButtonNextState;
@@ -114,7 +121,7 @@ function setAnswerButtonNextState() {
         showTopicSelectSection();
     }
     document.getElementById("question_section").style.background = "#dfe4d7";
-    document.getElementById("question_head").textContent = "Выберите правильный ответ:";
+    document.getElementById("question_head").textContent = "Выберите ответ:";
     document.getElementById("answer_select_button").innerHTML = "Ответить<span></span>";
     document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
 }
