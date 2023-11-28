@@ -1,6 +1,3 @@
-
-// import data from 'https://gribbirg.github.io/EvolutionTheoryTestFrontEnd/data.json' assert {type: 'json'};
-
 const response = await fetch('https://gribbirg.github.io/EvolutionTheoryTestFrontEnd/data.json');
 const data = await response.json();
 
