@@ -120,6 +120,7 @@ function setAnswerButtonNextState() {
     } else {
         alert("Все вопросы пройдены!");
         hideQuestionSection();
+        setTopicData();
         showTopicSelectSection();
     }
     document.getElementById("question_section").style.background = "#dfe4d7";
