@@ -32,6 +32,7 @@ section {
         flex-flow: column nowrap;
         align-items: center;
         width: fit-content;
+        margin: 10px 20px;
 
         > input {
             display: none;
