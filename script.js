@@ -1,4 +1,6 @@
+document.body.innerHTML += `<p>js start</p>`
 import data from 'https://gribbirg.github.io/EvolutionTheoryTestFrontEnd/data.json' assert {type: 'json'};
+document.body.innerHTML += `<p>json load</p>`
 
 let questions = [];
 let currentQuestionNum = 0;
