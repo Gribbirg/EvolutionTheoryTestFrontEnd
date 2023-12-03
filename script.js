@@ -118,6 +118,7 @@ function setAnswerButtonNextState() {
         setQuestion(questions[currentQuestionNum]);
     } else {
         alert("Все вопросы пройдены!");
+        window.location.href = "";
         hideQuestionSection();
         setTopicData();
         showTopicSelectSection();
