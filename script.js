@@ -1,4 +1,4 @@
-const response = await fetch('https://gribbirg.github.io/EvolutionTheoryTestFrontEnd/data.json');
+const response = await fetch('./data.json');
 const data = await response.json();
 
 let questions = [];
