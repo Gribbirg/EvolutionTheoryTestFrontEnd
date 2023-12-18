@@ -1,5 +1,5 @@
 header {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 2px;
     right: 2px;
@@ -22,6 +22,10 @@ header {
 
     > h1 {
         color: var(--md-sys-color-on-surface);
+        position: fixed;
+        left: 0;
+        right: 0;
+        text-align: center;
     }
 
     > nav {
@@ -56,4 +60,16 @@ main {
 
 #restart_href {
     visibility: hidden;
+}
+
+@media (max-width: 500px) {
+    header > h1 {
+        position: initial;
+    }
+}
+
+@media (max-width: 450px) {
+    header > h1 {
+        font-size: 20px;
+    }
 }
