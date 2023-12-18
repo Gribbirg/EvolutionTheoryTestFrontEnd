@@ -1,0 +1,12 @@
+.image_label {
+    display: grid;
+    grid: fit-content(100%) / fit-content(100%) 1fr;
+    /*justify-content: center;*/
+    justify-items: center;
+}
+
+@media (max-width: 650px) {
+    #question_section > img, #answer_select > label > img {
+        max-width: calc(100% - 10px);
+    }
+}

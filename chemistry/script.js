@@ -42,13 +42,27 @@ function showQuestionSection() {
 }
 
 function addAnswer(text, num) {
-    document.getElementById("answer_select").innerHTML += `
-    <input type="radio" name="answer_input" id="answer_${num}"><label for="answer_${num}">${num + 1 + ") " + text}</label>
-    `
+    if ((text ?? "").includes(".png")) {
+        document.getElementById("answer_select").innerHTML += `
+        <input type="radio" name="answer_input" id="answer_${num}"><label for="answer_${num}">${num + 1 + ")"}<img src="images/${text}" alt="${text}"></label>
+        `
+        document.querySelector(`label[for="answer_${num}"]`).className = "image_label"
+    } else {
+        document.getElementById("answer_select").innerHTML += `
+        <input type="radio" name="answer_input" id="answer_${num}"><label for="answer_${num}">${num + 1 + ") " + text}</label>
+        `
+    }
 }
 
 function setQuestion(question) {
     document.getElementById("question_text").textContent = question.name;
+    if (question["image"]) {
+        document.getElementById("question_img").src = `images/${question["image"]}`;
+        document.getElementById("question_img").alt = `images/${question["image"]}`;
+        document.getElementById("question_img").style.display = "block";
+    } else {
+        document.getElementById("question_img").style.display = "none";
+    }
     document.getElementById("answer_select").innerHTML = "";
     let answers = question["answers"].slice();
     shuffle(answers);

@@ -124,3 +124,7 @@ section {
 #question_section {
     display: none;
 }
+
+#question_img {
+    display: none;
+}
