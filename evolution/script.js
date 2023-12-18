@@ -99,13 +99,13 @@ function setAnswerButtonAnsState() {
     let ans = getSelectedAnswerInput();
     if (ans === rightAnswerNum) {
         document.getElementById("question_head").textContent = `Правильно!`;
-        document.getElementById("question_section").style.background = "#d4ffcf";
+        document.getElementById("question_section").style.backgroundColor = "var(--md-sys-color-tertiary-container)";
     } else if (ans === -1) {
         alert("Выберите ответ!");
         return;
     } else {
         document.getElementById("question_head").textContent = `Неправильно!`;
-        document.getElementById("question_section").style.background = "#ffdad6";
+        document.getElementById("question_section").style.backgroundColor = "var(--md-sys-color-error-container)";
     }
     removeInputListeners();
     document.getElementById(`answer_${rightAnswerNum}`).nextElementSibling.classList.add("right");
@@ -125,7 +125,7 @@ function setAnswerButtonNextState() {
         setTopicData();
         showTopicSelectSection();
     }
-    document.getElementById("question_section").style.background = "#dfe4d7";
+    document.getElementById("question_section").style.background = "var(--md-sys-color-surface-variant)";
     document.getElementById("question_head").textContent = "Выберите ответ:";
     document.getElementById("answer_select_button").innerHTML = "Ответить<span></span>";
     document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;

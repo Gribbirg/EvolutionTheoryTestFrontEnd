@@ -18,12 +18,12 @@ main {
 
 section {
     width: 800px;
-    background: var(--md-sys-color-surface);
+    background: var(--md-sys-color-surface-variant);
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     border-radius: 20px;
-    /*box-shadow: 1px 1px 8px 2px var(--md-sys-color-shadow);*/
+    box-shadow: 1px 1px 10px 2px var(--md-sys-color-shadow);
 
     > * {
         color: var(--md-sys-color-on-surface);
@@ -48,18 +48,21 @@ section {
 
         > label, > a {
             text-decoration: none;
-            margin: 10px;
-            background: var(--md-sys-color-primary-container);
-            color: var(--md-sys-color-on-primary-container);
-            padding: 5px 10px;
+            margin: 5px;
+            color: var(--md-sys-color-on-surface);
+            outline: var(--md-sys-color-on-surface) 1px solid;
+            padding: 15px 10px;
             width: 100%;
             cursor: pointer;
             border-radius: 10px;
+            transition: all 400ms;
         }
 
         > label:hover, > a:hover {
             background: var(--md-sys-color-tertiary-container);
-            color: var(--md-sys-color-on-tertiary-container);
+            /*color: var(--md-sys-color-on-tertiary-container);*/
+            box-shadow: 1px 1px 8px var(--md-sys-color-shadow);
+            /*outline: none;*/
         }
 
         > label::before {
@@ -76,19 +79,24 @@ section {
     }
 }
 
-.selected {
-    background: #a5eeff;
-    color: #001f25;
-}
 
 .right {
-    background: #77ff61;
-    color: #002200;
+    background: var(--md-sys-color-tertiary-container);
+    /*color: var(--md-sys-color-on-tertiary-container);*/
+    box-shadow: 1px 1px 18px var(--md-sys-color-shadow);
+}
+
+.selected {
+    background: var(--md-sys-color-primary-container);
+    /*color: var(--md-sys-color-on-primary-container);*/
+    /*box-shadow: 1px 1px 8px var(--md-sys-color-shadow);*/
+    /*outline: none;*/
 }
 
 @media (max-width: 850px) {
     section {
         width: 95%;
+
         > div {
             width: 90%;
         }
