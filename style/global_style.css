@@ -1,5 +1,7 @@
+@import "/header/style.css";
+
 body {
-    background: #fcfdf6;
+    background: var(--md-sys-color-background);
 }
 
 main {
@@ -10,15 +12,15 @@ main {
 
 section {
     width: 800px;
-    background: #dfe4d7;
+    background: var(--md-sys-color-surface);
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     border-radius: 20px;
-    box-shadow: 1px 1px 4px 2px grey;
+    /*box-shadow: 1px 1px 8px 2px var(--md-sys-color-shadow);*/
 
     > * {
-        color: #1a1c18;
+        color: var(--md-sys-color-on-surface);
     }
 
     > h2, > h3 {
@@ -41,13 +43,17 @@ section {
         > label, > a {
             text-decoration: none;
             margin: 10px;
-            background: #ffddb2;
-            color: #291800;
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
             padding: 5px 10px;
             width: 100%;
             cursor: pointer;
             border-radius: 10px;
-            box-shadow: 1px 1px 3px 1px grey;
+        }
+
+        > label:hover, > a:hover {
+            background: var(--md-sys-color-tertiary-container);
+            color: var(--md-sys-color-on-tertiary-container);
         }
 
         > label::before {
