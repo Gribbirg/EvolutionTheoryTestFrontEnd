@@ -1,5 +1,5 @@
-@import url("/header/style.css");
-@import url("/footer/style.css");
+@import url("/centralized-testing-training/header/style.css");
+@import url("/centralized-testing-training/footer/style.css");
 
 body {
     background: var(--md-sys-color-background);
