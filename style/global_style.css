@@ -23,7 +23,7 @@ section {
     flex-flow: column nowrap;
     align-items: center;
     border-radius: 20px;
-    box-shadow: 1px 1px 10px 2px var(--md-sys-color-shadow);
+    box-shadow: 1px 1px 8px var(--md-sys-color-shadow);
 
     > * {
         color: var(--md-sys-color-on-surface);
@@ -55,7 +55,7 @@ section {
             width: 100%;
             cursor: pointer;
             border-radius: 10px;
-            transition: all 400ms;
+            transition: box-shadow 400ms, background-color 400ms;
         }
 
         > label:hover, > a:hover {

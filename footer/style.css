@@ -4,12 +4,12 @@ footer {
     background-color: var(--md-sys-color-secondary-container);
     box-shadow: 0 -2px 10px var(--md-sys-color-shadow);
     height: 100%;
-    width: calc(100% + 12px);
+    width: calc(100% + 16px);
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     position: relative;
-    left: -6px;
-    right: -6px;
+    left: -8px;
+    right: -8px;
     bottom: -8px;
     justify-items: center;
     padding: 5px 0;
@@ -45,6 +45,7 @@ footer {
                 }
 
                 > input:checked + label {
+                    outline: var(--md-sys-color-primary) 1px solid;
                     border-color: var(--md-sys-color-primary);
                     color: var(--md-sys-color-on-primary-container);
                     background-color: var(--md-sys-color-primary-container);
@@ -97,7 +98,7 @@ footer {
                 }
 
                 > label {
-                    outline: var(--md-sys-color-outline) 1px solid;
+                    outline: var(--md-sys-color-on-surface) 1px solid;
                     display: block;
                     width: 25px;
                     height: 25px;
@@ -107,7 +108,8 @@ footer {
                 }
 
                 > input:checked + label {
-                    box-shadow: 1px 1px 8px var(--md-sys-color-shadow);
+                    box-shadow: 1px 1px 10px var(--md-sys-color-shadow);
+                    outline-width: 2px;
                 }
             }
 
