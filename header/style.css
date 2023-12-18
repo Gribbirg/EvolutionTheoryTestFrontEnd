@@ -22,7 +22,7 @@ header {
     }
 
     > h1 {
-        color: var(--md-sys-color-on-primary-container);
+        color: var(--md-sys-color-on-surface);
         position: fixed;
         left: 120px;
         right: 120px;
