@@ -27,7 +27,7 @@ document.body.innerHTML += `
         <p>
             <a href="mailto:gribkovalexander@gmail.com">gribkovalexander@gmail.com</a>
         </p>
-        <p><small>Screaming Mushrooms 2023</small></p>
+        <p><small>© Screaming Mushrooms, 2023</small></p>
     </address>
 </footer>
 `
