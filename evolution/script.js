@@ -75,9 +75,9 @@ function getSelectedAnswerInput() {
 }
 
 function addInputListeners() {
-    for (let label of document.querySelectorAll("label")) {
+    for (let label of document.querySelectorAll("main > section > div > label")) {
         label.onclick = function () {
-            for (let label1 of document.querySelectorAll("label")) {
+            for (let label1 of document.querySelectorAll("main > section > div > label")) {
                 if (label1.classList.contains("selected"))
                     label1.classList.remove("selected")
 
