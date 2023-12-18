@@ -20,13 +20,6 @@ function setTopicData() {
     addInputListeners();
 }
 
-function getSelectedTopicInput() {
-    for (let i = 0; i < data.length; i++)
-        if (document.getElementById(`topic_${i}`).checked)
-            return i;
-    return -1;
-}
-
 function hideTopicSelectSection() {
     document.getElementById("topic_select_section").style.display = "none";
 }
@@ -134,18 +127,15 @@ function setAnswerButtonNextState() {
 hideQuestionSection();
 setTopicData();
 
-document.getElementById("topic_select_accept_button").onclick = function () {
-    let categoryNum = getSelectedTopicInput();
-    if (categoryNum !== -1) {
+document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
+
+for (let input of document.querySelectorAll(`input[name="topic_input"]`)) {
+    input.onchange = function () {
         hideTopicSelectSection();
-        questions = data[categoryNum]["questions"].slice();
+        questions = data[Number(input.id.split("_")[1])]["questions"].slice();
         shuffle(questions);
         currentQuestionNum = 0;
         setQuestion(questions[currentQuestionNum]);
         showQuestionSection();
-    } else {
-        alert("Выберите тему!");
     }
 }
-
-document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
