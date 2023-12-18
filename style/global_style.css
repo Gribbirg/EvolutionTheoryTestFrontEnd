@@ -1,5 +1,5 @@
-@import "/header/style.css";
-@import "/footer/style.css";
+@import url("/header/style.css");
+@import url("/footer/style.css");
 
 body {
     background: var(--md-sys-color-background);
