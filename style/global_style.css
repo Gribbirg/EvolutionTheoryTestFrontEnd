@@ -1,7 +1,13 @@
 @import "/header/style.css";
+@import "/footer/style.css";
 
 body {
     background: var(--md-sys-color-background);
+    min-height: calc(100vh - 16px);
+    padding: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
 }
 
 main {
