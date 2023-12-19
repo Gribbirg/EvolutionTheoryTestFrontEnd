@@ -1,7 +1,7 @@
 setRestartHref("chemistry");
 document.getElementById("header_head").textContent = "Органическая химия";
 
-const response = await fetch('./data.json');
+const response = await fetch('../data/chemistry.json');
 const data = await response.json();
 
 let questions = [];
@@ -47,7 +47,7 @@ function showQuestionSection() {
 function addAnswer(text, num) {
     if ((text ?? "").includes(".png")) {
         document.getElementById("answer_select").innerHTML += `
-        <input type="radio" name="answer_input" id="answer_${num}"><label for="answer_${num}">${num + 1 + ")"}<img src="images/${text}" alt="${text}" class="theme_img"></label>
+        <input type="radio" name="answer_input" id="answer_${num}"><label for="answer_${num}">${num + 1 + ")"}<img src="../images/chemistry/${text}" alt="${text}" class="theme_img"></label>
         `
         document.querySelector(`label[for="answer_${num}"]`).className = "image_label"
     } else {
@@ -60,8 +60,8 @@ function addAnswer(text, num) {
 function setQuestion(question) {
     document.getElementById("question_text").textContent = question.name;
     if (question["image"]) {
-        document.getElementById("question_img").src = `images/${question["image"]}`;
-        document.getElementById("question_img").alt = `images/${question["image"]}`;
+        document.getElementById("question_img").src = `../images/chemistry/${question["image"]}`;
+        document.getElementById("question_img").alt = `../images/chemistry/${question["image"]}`;
         document.getElementById("question_img").style.display = "block";
     } else {
         document.getElementById("question_img").style.display = "none";
