@@ -107,7 +107,7 @@ section {
     /*border: #00444f 1px solid;*/
     border: none;
     border-radius: 30px;
-    /*box-shadow: 2px 2px 4px black;*/
+    box-shadow: 1px 1px 4px var(--md-sys-color-shadow);
     background: var(--md-sys-color-primary);
     color: var(--md-sys-color-on-primary);
     transition: all 400ms;
