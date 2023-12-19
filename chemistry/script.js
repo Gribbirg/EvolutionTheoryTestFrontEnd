@@ -21,13 +21,6 @@ function setTopicData() {
     addInputListeners();
 }
 
-function getSelectedTopicInput() {
-    for (let i = 0; i < data.length; i++)
-        if (document.getElementById(`topic_${i}`).checked)
-            return i;
-    return -1;
-}
-
 function hideTopicSelectSection() {
     document.getElementById("topic_select_section").style.display = "none";
 }
