@@ -1,4 +1,5 @@
 setRestartHref("chemistry");
+document.getElementById("header_head").textContent = "Органическая химия";
 
 const response = await fetch('./data.json');
 const data = await response.json();
