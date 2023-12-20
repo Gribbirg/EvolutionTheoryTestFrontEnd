@@ -12,8 +12,9 @@ body {
 
 main {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     justify-content: center;
+    align-items: center;
 }
 
 section {
@@ -24,6 +25,7 @@ section {
     align-items: center;
     border-radius: 20px;
     box-shadow: 1px 1px 8px var(--md-sys-color-shadow);
+    margin: 10px;
 
     > * {
         color: var(--md-sys-color-on-surface);
@@ -33,6 +35,7 @@ section {
         margin-right: 10px;
         margin-left: 10px;
         text-align: center;
+        display: inline;
     }
 
     > div {
@@ -40,7 +43,7 @@ section {
         flex-flow: column nowrap;
         align-items: center;
         width: fit-content;
-        margin: 10px 20px;
+        margin: 0 20px 10px;
 
         > input {
             display: none;
@@ -50,12 +53,12 @@ section {
             text-decoration: none;
             margin: 5px;
             color: var(--md-sys-color-on-surface);
-            outline: var(--md-sys-color-on-surface) 1px solid;
+            outline: var(--md-sys-color-outline) 1px solid;
             padding: 15px 10px;
             width: 100%;
             cursor: pointer;
             border-radius: 10px;
-            transition: box-shadow 400ms, background-color 400ms;
+            transition: all 400ms;
         }
 
         > label:hover, > a:hover {
@@ -90,7 +93,7 @@ section {
     background: var(--md-sys-color-primary-container);
     /*color: var(--md-sys-color-on-primary-container);*/
     /*box-shadow: 1px 1px 8px var(--md-sys-color-shadow);*/
-    outline-width: 2px;
+    outline: var(--md-sys-color-on-surface) 2px solid;
 }
 
 @media (max-width: 850px) {
@@ -167,5 +170,5 @@ section {
     right: -10px;
     top: -15px;
     color: var(--md-sys-color-error);
-    filter: drop-shadow(2px 2px var(--md-sys-color-shadow));
+    filter: drop-shadow(1px 1px var(--md-sys-color-shadow));
 }
