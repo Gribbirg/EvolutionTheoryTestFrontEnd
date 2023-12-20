@@ -64,7 +64,7 @@ section {
         > label:hover, > a:hover {
             background: var(--md-sys-color-tertiary-container);
             /*color: var(--md-sys-color-on-tertiary-container);*/
-            box-shadow: 1px 1px 8px var(--md-sys-color-shadow);
+            box-shadow: 1px 1px 10px var(--md-sys-color-shadow);
             /*outline: none;*/
         }
 
@@ -163,7 +163,7 @@ section {
 
 .with_warning::before {
     display: block;
-    content: "⚠";
+    content: "\26A0";
     font-size: 1.5rem;
     text-align: center;
     position: absolute;

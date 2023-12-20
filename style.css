@@ -45,7 +45,7 @@
 
 .news_element_div {
     display: grid;
-    grid: fit-content(100%) fit-content(100%) / fit-content(100%) 1fr;
+    grid: fit-content(100%) fit-content(100%) / 1fr fit-content(100%);
     grid-template-areas: "name date" "description description";
     width: 300px;
     outline: var(--md-sys-color-outline) 2px solid;
@@ -76,7 +76,7 @@
 .news_element_div:hover {
     background: var(--md-sys-color-tertiary-container);
     /*color: var(--md-sys-color-on-tertiary-container);*/
-    box-shadow: 1px 1px 8px var(--md-sys-color-shadow);
+    box-shadow: 1px 1px 12px var(--md-sys-color-shadow);
 }
 
 @media (max-width: 850px) {
