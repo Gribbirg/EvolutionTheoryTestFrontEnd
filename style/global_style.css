@@ -164,11 +164,11 @@ section {
 .with_warning::before {
     display: block;
     content: "\26A0";
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     text-align: center;
     position: absolute;
-    right: -10px;
-    top: -15px;
+    right: 4px;
+    top: -2px;
     color: var(--md-sys-color-error);
     filter: drop-shadow(1px 1px var(--md-sys-color-shadow));
 }
