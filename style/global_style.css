@@ -36,6 +36,8 @@ section {
         margin-left: 10px;
         text-align: center;
         display: inline;
+        white-space: pre-line;
+        overflow-wrap: break-word;
     }
 
     > div {
@@ -59,6 +61,8 @@ section {
             cursor: pointer;
             border-radius: 10px;
             transition: all 400ms;
+            white-space: pre-line;
+            overflow-wrap: break-word;
         }
 
         > label:hover, > a:hover {
