@@ -3,6 +3,15 @@
     grid: fit-content(100%) / fit-content(100%) 1fr;
     /*justify-content: center;*/
     justify-items: center;
+
+    > img {
+        max-width: 700px;
+    }
+}
+
+#question_img {
+    margin-bottom: 10px;
+    max-width: 500px;
 }
 
 @media (max-width: 650px) {

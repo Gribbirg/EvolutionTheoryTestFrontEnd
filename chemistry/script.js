@@ -54,7 +54,7 @@ function setQuestion(question) {
     document.getElementById("question_text").textContent = question.name;
     if (question["image"]) {
         document.getElementById("question_img").src = `../images/chemistry/${question["image"]}`;
-        document.getElementById("question_img").alt = `../images/chemistry/${question["image"]}`;
+        document.getElementById("question_img").alt = `${question["image"]}`;
         document.getElementById("question_img").style.display = "block";
     } else {
         document.getElementById("question_img").style.display = "none";
