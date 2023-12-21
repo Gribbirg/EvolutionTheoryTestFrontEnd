@@ -12,7 +12,8 @@
 
     #topic_select_section {
         position: absolute;
-        left: calc(50vw - 195px);
+        left: calc(50% - 185px);
+        right: calc(50% - 185px);
         top: 0;
         width: 350px;
     }
