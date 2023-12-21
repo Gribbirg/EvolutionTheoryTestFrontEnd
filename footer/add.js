@@ -25,7 +25,7 @@ document.body.innerHTML += `
         Контакты разработчика:
         <p>По поводу ошибок пишите на:</p>
         <p>
-            <a href="mailto:gribkovalexander@gmail.com">gribkovalexander@gmail.com</a>
+            <a href="mailto:gribkovalexander@gmail.com?subject=Сайт для подготовки к ЦТ">gribkovalexander@gmail.com</a>
         </p>
         <p><small>© Screaming Mushrooms, 2023</small></p>
     </address>
