@@ -14,4 +14,5 @@ document.querySelector("main").innerHTML += `
         <img id="question_img" class="theme_img">
         <div id="answer_select"></div>
         <button id="answer_select_button" class="arrow_button">Ответить<span></span></button>
-    </section>`
+    </section>
+    <small id="question_info"></small>`
