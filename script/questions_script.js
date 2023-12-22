@@ -11,6 +11,7 @@ function startQuestions(name, data1) {
     setRestartHref(name);
 
     questions = JSON.parse(localStorage.getItem(`${subject}_questions`) ?? "[]");
+    console.log(questions)
     if (questions.length !== 0) {
         hideTopicSelectSection();
         currentQuestionNum = localStorage.getItem(`${subject}_current_question_num`);
@@ -28,17 +29,14 @@ function startQuestions(name, data1) {
                 currentQuestionNum = 0;
                 setQuestion(questions[currentQuestionNum]);
                 showQuestionSection();
+                localStorage.setItem(`${subject}_questions`, JSON.stringify(questions));
+                localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
             }
         }
     }
     document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
 
-    window.addEventListener("beforeunload", setStorage);
-}
-
-function setStorage() {
-    localStorage.setItem(`${subject}_questions`, JSON.stringify(questions));
-    localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
+    // window.addEventListener("beforeunload", setStorage);
 }
 
 function addTopic(name, num) {
@@ -150,10 +148,11 @@ function setAnswerButtonAnsState() {
     document.getElementById(`answer_${rightAnswerNum}`).nextElementSibling.classList.add("right");
     document.getElementById("answer_select_button").innerHTML = "Следующий<span></span>";
     document.getElementById("answer_select_button").onclick = setAnswerButtonNextState;
+    currentQuestionNum++;
+    localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
 }
 
 function setAnswerButtonNextState() {
-    currentQuestionNum++;
     if (currentQuestionNum < questions.length) {
         setQuestion(questions[currentQuestionNum]);
     } else {

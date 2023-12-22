@@ -15,11 +15,9 @@ function setRestartHref(subject) {
     restart.href = `/centralized-testing-training/${subject}`;
     restart.style.visibility = "initial";
     document.getElementById("header").onclick = function (event) {
-        alert(event.target.id)
         if (event.target.closest("#restart_href")) {
             localStorage.removeItem(`${subject}_questions`);
             localStorage.removeItem(`${subject}_current_question_num`);
-            window.removeEventListener("beforeunload", setStorage);
         }
     }
 }
