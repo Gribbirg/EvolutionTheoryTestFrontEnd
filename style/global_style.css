@@ -43,12 +43,14 @@ section {
 }
 
 .question_section {
+    position: relative;
     > div {
         display: flex;
         flex-flow: column nowrap;
         align-items: center;
-        width: fit-content;
+        max-width: calc(100% - 40px);
         margin: 0 20px 10px;
+        position: relative;
 
         > input {
             position: absolute;
@@ -218,9 +220,10 @@ section {
     section, #status_bar {
         width: 95%;
     }
+}
 
-    section > div {
-        width: 90%;
+@media (max-width: 450px) {
+    #status_bar {
+        justify-content: center;
     }
-
 }
