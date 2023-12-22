@@ -45,6 +45,7 @@ function startQuestions(name, data1) {
             document.getElementById("all_count").textContent = questions.length.toString();
         }
     }
+    setQuestionChangeButtonsListeners();
 }
 
 
@@ -91,6 +92,8 @@ function addAnswer(text, num) {
 }
 
 function setQuestion(question) {
+    localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
+    document.getElementById("question_number").textContent = (currentQuestionNum + 1).toString()
     document.getElementById("question_text").textContent = question.name;
 
     let img = document.getElementById("question_img");
@@ -114,8 +117,11 @@ function setQuestion(question) {
         document.getElementById(`answer_${rightAnswerNum}`).nextElementSibling.classList.add("right");
         setRightSectionState(ansNum === rightAnswerNum);
     } else {
+        setRightSectionState();
         document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
     }
+
+    setQuestionChangeButtonsState();
 }
 
 function findInAnswers(stockIndex) {
@@ -136,14 +142,21 @@ function getSelectedAnswerInput() {
     return -1;
 }
 
-function setRightSectionState(right) {
-    document.getElementById("question_head").textContent = (right) ? `Правильно!` : `Неправильно!`;
-    document.getElementById("question_section").style.backgroundColor = (right) ? "var(--md-sys-color-tertiary-container)" : "var(--md-sys-color-error-container)";
-    document.getElementById("answer_select_button").innerHTML = "Следующий<span></span>";
-    document.getElementById("answer_select_button").onclick = setAnswerButtonNextState;
-    document.querySelectorAll(`input[name="answer_input"]`).forEach(function (item) {
-        item.disabled = true;
-    });
+function setRightSectionState(right = undefined) {
+    if (right === undefined) {
+        document.getElementById("question_section").style.background = "var(--md-sys-color-surface-variant)";
+        document.getElementById("question_head").textContent = "Выберите ответ:";
+        document.getElementById("answer_select_button").innerHTML = "Ответить<span></span>";
+        document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
+    } else {
+        document.getElementById("question_head").textContent = (right) ? `Правильно!` : `Неправильно!`;
+        document.getElementById("question_section").style.backgroundColor = (right) ? "var(--md-sys-color-tertiary-container)" : "var(--md-sys-color-error-container)";
+        document.getElementById("answer_select_button").innerHTML = "Следующий<span></span>";
+        document.getElementById("answer_select_button").onclick = setAnswerButtonNextState;
+        document.querySelectorAll(`input[name="answer_input"]`).forEach(function (item) {
+            item.disabled = true;
+        });
+    }
 }
 
 function setAnswerButtonAnsState() {
@@ -163,7 +176,9 @@ function setAnswerButtonAnsState() {
         document.getElementById("not_right_count").textContent = (completedCount + 1 - rightAnswersCount).toString();
     }
 
-    questions[currentQuestionNum]["user_answer"] = questions[currentQuestionNum]["answers"].findIndex(function (item) { return item === answers[ans] });
+    questions[currentQuestionNum]["user_answer"] = questions[currentQuestionNum]["answers"].findIndex(function (item) {
+        return item === answers[ans]
+    });
     localStorage.setItem(`${subject}_questions`, JSON.stringify(questions));
 
     document.getElementById(`answer_${rightAnswerNum}`).nextElementSibling.classList.add("right");
@@ -173,17 +188,28 @@ function setAnswerButtonAnsState() {
 }
 
 function setAnswerButtonNextState() {
-    currentQuestionNum++;
-    localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
+    do {
+        currentQuestionNum++;
+    } while (currentQuestionNum < questions.length && questions[currentQuestionNum]["user_answer"] !== undefined);
     if (currentQuestionNum < questions.length) {
         setQuestion(questions[currentQuestionNum]);
+        return;
     } else {
-        alert("Все вопросы пройдены!");
-        cleanStorage();
-        window.location.href = "";
-        hideQuestionSection();
-        setTopicData();
-        showTopicSelectSection();
+        for (let i = 0; i < questions.length; i++) {
+            if (questions[i]["user_answer"] === undefined) {
+                currentQuestionNum = i;
+                setQuestion(questions[currentQuestionNum]);
+                break;
+            }
+        }
+        if (currentQuestionNum === questions.length) {
+            alert("Все вопросы пройдены!");
+            cleanStorage();
+            window.location.href = "";
+            hideQuestionSection();
+            setTopicData();
+            showTopicSelectSection();
+        }
     }
     document.getElementById("question_section").style.background = "var(--md-sys-color-surface-variant)";
     document.getElementById("question_head").textContent = "Выберите ответ:";
@@ -206,4 +232,21 @@ function cleanStorage() {
     localStorage.removeItem(`${subject}_current_question_num`);
     localStorage.removeItem(`${subject}_current_question_num`);
     localStorage.removeItem(`${subject}_right_answers_count`);
+}
+
+function setQuestionChangeButtonsState() {
+    document.getElementById("previous_question_button").style.visibility = (currentQuestionNum === 0)? "hidden": "initial";
+    document.getElementById("next_question_button").style.visibility = (currentQuestionNum === questions.length - 1)? "hidden": "initial";
+}
+
+function setQuestionChangeButtonsListeners() {
+    document.getElementById("previous_question_button").onclick = function () {
+        currentQuestionNum--;
+        setQuestion(questions[currentQuestionNum]);
+
+    }
+    document.getElementById("next_question_button").onclick = function () {
+        currentQuestionNum++;
+        setQuestion(questions[currentQuestionNum]);
+    }
 }
