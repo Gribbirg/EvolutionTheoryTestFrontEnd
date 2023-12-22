@@ -4,6 +4,8 @@ let questions = [];
 let currentQuestionNum = 0;
 let rightAnswerNum = 0;
 let rightAnswersCount = 0;
+let completedCount = 0;
+let answers = [];
 
 function startQuestions(name, data1) {
     subject = name;
@@ -16,12 +18,13 @@ function startQuestions(name, data1) {
         hideTopicSelectSection();
         currentQuestionNum = Number(localStorage.getItem(`${subject}_current_question_num`) ?? 0);
         rightAnswersCount = Number(localStorage.getItem(`${subject}_right_answers_count`) ?? 0);
+        completedCount = Number(localStorage.getItem(`${subject}_completed_count`) ?? 0);
         setQuestion(questions[currentQuestionNum]);
         showQuestionSection();
         document.getElementById("all_count").textContent = questions.length.toString();
-        document.getElementById("completed_count").textContent = currentQuestionNum;
+        document.getElementById("completed_count").textContent = completedCount;
         document.getElementById("right_count").textContent = rightAnswersCount.toString();
-        document.getElementById("not_right_count").textContent = (currentQuestionNum - rightAnswersCount).toString();
+        document.getElementById("not_right_count").textContent = (completedCount - rightAnswersCount).toString();
     } else {
         hideQuestionSection();
         setTopicData();
@@ -42,7 +45,6 @@ function startQuestions(name, data1) {
             document.getElementById("all_count").textContent = questions.length.toString();
         }
     }
-    document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
 }
 
 
@@ -101,12 +103,25 @@ function setQuestion(question) {
     }
 
     document.getElementById("answer_select").innerHTML = "";
-    let answers = question["answers"].slice();
+    answers = question["answers"].slice();
     shuffle(answers);
     for (let i = 0; i < answers.length; i++) addAnswer(answers[i], i);
-    rightAnswerNum = answers.findIndex(function (item) {
-        return item === question["answers"][0];
-    })
+    rightAnswerNum = findInAnswers(0);
+    let ans = question["user_answer"];
+    if (ans !== undefined) {
+        let ansNum = findInAnswers(ans);
+        document.getElementById(`answer_${ansNum}`).checked = true;
+        document.getElementById(`answer_${rightAnswerNum}`).nextElementSibling.classList.add("right");
+        setRightSectionState(ansNum === rightAnswerNum);
+    } else {
+        document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
+    }
+}
+
+function findInAnswers(stockIndex) {
+    return answers.findIndex(function (item) {
+        return item === questions[currentQuestionNum]["answers"][stockIndex];
+    });
 }
 
 function shuffle(array) {
@@ -121,28 +136,21 @@ function getSelectedAnswerInput() {
     return -1;
 }
 
-// function addInputListeners() {
-//     for (let label of document.querySelectorAll("main > section > div > label")) {
-//         label.onclick = function () {
-//             for (let label1 of document.querySelectorAll("main > section > div > label")) {
-//                 if (label1.classList.contains("selected")) label1.classList.remove("selected")
-//             }
-//             label.classList.add("selected");
-//         }
-//     }
-// }
-
-function removeInputListeners() {
-    for (let label of document.querySelectorAll("label")) {
-        label.onclick = null;
-    }
+function setRightSectionState(right) {
+    document.getElementById("question_head").textContent = (right) ? `Правильно!` : `Неправильно!`;
+    document.getElementById("question_section").style.backgroundColor = (right) ? "var(--md-sys-color-tertiary-container)" : "var(--md-sys-color-error-container)";
+    document.getElementById("answer_select_button").innerHTML = "Следующий<span></span>";
+    document.getElementById("answer_select_button").onclick = setAnswerButtonNextState;
+    document.querySelectorAll(`input[name="answer_input"]`).forEach(function (item) {
+        item.disabled = true;
+    });
 }
 
 function setAnswerButtonAnsState() {
     let ans = getSelectedAnswerInput();
     if (ans === rightAnswerNum) {
-        document.getElementById("question_head").textContent = `Правильно!`;
-        document.getElementById("question_section").style.backgroundColor = "var(--md-sys-color-tertiary-container)";
+        setRightSectionState(true);
+
         rightAnswersCount++;
         document.getElementById("right_count").textContent = rightAnswersCount.toString();
         localStorage.setItem(`${subject}_right_answers_count`, rightAnswersCount.toString());
@@ -150,20 +158,23 @@ function setAnswerButtonAnsState() {
         alert("Выберите ответ!");
         return;
     } else {
-        document.getElementById("question_head").textContent = `Неправильно!`;
-        document.getElementById("question_section").style.backgroundColor = "var(--md-sys-color-error-container)";
-        document.getElementById("not_right_count").textContent = (currentQuestionNum + 1 - rightAnswersCount).toString();
+        setRightSectionState(false);
+
+        document.getElementById("not_right_count").textContent = (completedCount + 1 - rightAnswersCount).toString();
     }
-    removeInputListeners();
+
+    questions[currentQuestionNum]["user_answer"] = questions[currentQuestionNum]["answers"].findIndex(function (item) { return item === answers[ans] });
+    localStorage.setItem(`${subject}_questions`, JSON.stringify(questions));
+
     document.getElementById(`answer_${rightAnswerNum}`).nextElementSibling.classList.add("right");
-    document.getElementById("answer_select_button").innerHTML = "Следующий<span></span>";
-    document.getElementById("answer_select_button").onclick = setAnswerButtonNextState;
-    currentQuestionNum++;
-    document.getElementById("completed_count").textContent = currentQuestionNum;
-    localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
+    completedCount++;
+    document.getElementById("completed_count").textContent = completedCount;
+    localStorage.setItem(`${subject}_completed_count`, completedCount);
 }
 
 function setAnswerButtonNextState() {
+    currentQuestionNum++;
+    localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
     if (currentQuestionNum < questions.length) {
         setQuestion(questions[currentQuestionNum]);
     } else {

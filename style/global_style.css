@@ -69,7 +69,7 @@ section {
             overflow-wrap: break-word;
         }
 
-        > label:hover, > a:hover {
+        > input:not(:disabled) + label:hover, > a:hover {
             background: var(--md-sys-color-tertiary-container);
             /*color: var(--md-sys-color-on-tertiary-container);*/
             box-shadow: 1px 1px 10px var(--md-sys-color-shadow);
@@ -82,10 +82,14 @@ section {
         }
 
         > input:checked + label {
-            background: var(--md-sys-color-primary-container);
+            background-color: var(--md-sys-color-primary-container);
             /*color: var(--md-sys-color-on-primary-container);*/
             /*box-shadow: 1px 1px 8px var(--md-sys-color-shadow);*/
             outline: var(--md-sys-color-on-surface) 2px solid;
+        }
+
+        > input:disabled + label {
+            cursor: initial;
         }
     }
 
@@ -108,16 +112,6 @@ section {
     /*color: var(--md-sys-color-on-primary-container);*/
     /*box-shadow: 1px 1px 8px var(--md-sys-color-shadow);*/
     outline: var(--md-sys-color-on-surface) 2px solid;
-}
-
-@media (max-width: 850px) {
-    section {
-        width: 95%;
-
-        > div {
-            width: 90%;
-        }
-    }
 }
 
 .arrow_button {
@@ -218,4 +212,15 @@ section {
 
 #all_count {
     color: var(--md-sys-color-secondary)
+}
+
+@media (max-width: 850px) {
+    section, #status_bar {
+        width: 95%;
+    }
+
+    section > div {
+        width: 90%;
+    }
+
 }
