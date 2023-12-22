@@ -49,7 +49,8 @@ section {
         margin: 0 20px 10px;
 
         > input {
-            display: none;
+            position: absolute;
+            visibility: hidden;
         }
 
         > label, > a {
@@ -78,6 +79,12 @@ section {
             right: 10px;
         }
 
+        > input:checked + label {
+            background: var(--md-sys-color-primary-container);
+            /*color: var(--md-sys-color-on-primary-container);*/
+            /*box-shadow: 1px 1px 8px var(--md-sys-color-shadow);*/
+            outline: var(--md-sys-color-on-surface) 2px solid;
+        }
     }
 
     > button {

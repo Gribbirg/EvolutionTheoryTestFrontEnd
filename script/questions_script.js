@@ -11,7 +11,6 @@ function startQuestions(name, data1) {
     setRestartHref(name);
 
     questions = JSON.parse(localStorage.getItem(`${subject}_questions`) ?? "[]");
-    console.log(questions)
     if (questions.length !== 0) {
         hideTopicSelectSection();
         currentQuestionNum = localStorage.getItem(`${subject}_current_question_num`);
@@ -21,27 +20,27 @@ function startQuestions(name, data1) {
         hideQuestionSection();
         setTopicData();
 
-        for (let input of document.querySelectorAll(`input[name="topic_input"]`)) {
-            input.onchange = function () {
-                hideTopicSelectSection();
-                questions = data[Number(input.id.split("_")[1])]["questions"].slice();
-                shuffle(questions);
-                currentQuestionNum = 0;
-                setQuestion(questions[currentQuestionNum]);
-                showQuestionSection();
-                localStorage.setItem(`${subject}_questions`, JSON.stringify(questions));
-                localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
+        document.getElementById("topic_select_button").onclick = function () {
+            questions = getTopicInputsQuestions();
+            if (questions.length === 0) {
+                alert("Выберите темы!");
+                return;
             }
+            hideTopicSelectSection();
+            shuffle(questions);
+            currentQuestionNum = 0;
+            setQuestion(questions[currentQuestionNum]);
+            showQuestionSection();
+            localStorage.setItem(`${subject}_questions`, JSON.stringify(questions));
+            localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
         }
     }
     document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
-
-    // window.addEventListener("beforeunload", setStorage);
 }
 
 function addTopic(name, num) {
     document.getElementById("topic_select").innerHTML += `
-        <input type="radio" name="topic_input" id="topic_${num}"><label for="topic_${num}">${num + 1 + ") " + name}</label>
+        <input type="checkbox" name="topic_input" id="topic_${num}"><label for="topic_${num}">${num + 1 + ") " + name}</label>
         `
 }
 
@@ -49,7 +48,6 @@ function setTopicData() {
     for (let i = 0; i < data.length; i++) {
         addTopic(data[i].name, i);
     }
-    addInputListeners();
 }
 
 function hideTopicSelectSection() {
@@ -97,7 +95,6 @@ function setQuestion(question) {
     let answers = question["answers"].slice();
     shuffle(answers);
     for (let i = 0; i < answers.length; i++) addAnswer(answers[i], i);
-    addInputListeners();
     rightAnswerNum = answers.findIndex(function (item) {
         return item === question["answers"][0];
     })
@@ -115,16 +112,16 @@ function getSelectedAnswerInput() {
     return -1;
 }
 
-function addInputListeners() {
-    for (let label of document.querySelectorAll("main > section > div > label")) {
-        label.onclick = function () {
-            for (let label1 of document.querySelectorAll("main > section > div > label")) {
-                if (label1.classList.contains("selected")) label1.classList.remove("selected")
-            }
-            label.classList.add("selected");
-        }
-    }
-}
+// function addInputListeners() {
+//     for (let label of document.querySelectorAll("main > section > div > label")) {
+//         label.onclick = function () {
+//             for (let label1 of document.querySelectorAll("main > section > div > label")) {
+//                 if (label1.classList.contains("selected")) label1.classList.remove("selected")
+//             }
+//             label.classList.add("selected");
+//         }
+//     }
+// }
 
 function removeInputListeners() {
     for (let label of document.querySelectorAll("label")) {
@@ -166,4 +163,14 @@ function setAnswerButtonNextState() {
     document.getElementById("question_head").textContent = "Выберите ответ:";
     document.getElementById("answer_select_button").innerHTML = "Ответить<span></span>";
     document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
+}
+
+function getTopicInputsQuestions() {
+    let res = [];
+    for (let input of document.querySelectorAll(`input[name="topic_input"]`)) {
+        if (input.checked) {
+            res = res.concat(data[Number(input.id.split("_")[1])]["questions"].slice());
+        }
+    }
+    return res;
 }
