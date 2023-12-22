@@ -32,7 +32,7 @@ section {
         color: var(--md-sys-color-on-surface);
     }
 
-    > h2, > h3 {
+    & h2, & h3 {
         margin-right: 10px;
         margin-left: 10px;
         text-align: center;
@@ -127,8 +127,6 @@ section {
 
         > input:checked + label {
             background-color: var(--md-sys-color-primary-container);
-            /*color: var(--md-sys-color-on-primary-container);*/
-            /*box-shadow: 1px 1px 8px var(--md-sys-color-shadow);*/
             outline: var(--md-sys-color-on-surface) 2px solid;
         }
 
@@ -152,6 +150,7 @@ section {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    align-items: center;
 }
 
 #answer_select_button {
@@ -161,9 +160,11 @@ section {
 }
 
 .question_change_button {
+    margin: 0;
     padding: 0;
-    /*width: 30px;*/
-    /*height: 30px;*/
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -179,14 +180,11 @@ section {
 
 .right {
     background: var(--md-sys-color-tertiary-container);
-    /*color: var(--md-sys-color-on-tertiary-container);*/
     box-shadow: 1px 1px 18px var(--md-sys-color-shadow);
 }
 
 .selected {
     background: var(--md-sys-color-primary-container);
-    /*color: var(--md-sys-color-on-primary-container);*/
-    /*box-shadow: 1px 1px 8px var(--md-sys-color-shadow);*/
     outline: var(--md-sys-color-on-surface) 2px solid;
 }
 

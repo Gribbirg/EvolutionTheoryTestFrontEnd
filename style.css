@@ -57,7 +57,7 @@
 
     > h3 {
         grid-area: name;
-        margin: 5px;
+        margin: 0 5px 10px;
         color: var(--md-sys-color-on-surface);
     }
 
@@ -71,6 +71,7 @@
     > p {
         grid-area: description;
         margin: 5px;
+        text-align: justify;
     }
 }
 
