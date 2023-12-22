@@ -40,7 +40,9 @@ section {
         white-space: pre-line;
         overflow-wrap: break-word;
     }
+}
 
+.question_section {
     > div {
         display: flex;
         flex-flow: column nowrap;
