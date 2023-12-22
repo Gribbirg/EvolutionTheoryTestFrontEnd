@@ -4,4 +4,4 @@ document.getElementById("header_head").textContent = "Теория эволюц�
 const response = await fetch('../data/evolution.json');
 const data = await response.json();
 
-startQuestions(data);
+startQuestions("evolution", data);

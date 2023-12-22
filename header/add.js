@@ -1,7 +1,7 @@
 "use strict"
 
 document.body.innerHTML +=
-    `<header>
+    `<header id="header">
         <img id="logo" src="/centralized-testing-training/images/logo.png" height="60px" alt="Logo">
             <h1 id="header_head">Подготовка к ЦТ</h1>
             <nav id="up_nav">
@@ -11,6 +11,15 @@ document.body.innerHTML +=
     </header>`
 
 function setRestartHref(subject) {
-    document.getElementById("restart_href").href = `/centralized-testing-training/${subject}`;
-    document.getElementById("restart_href").style.visibility = "initial";
+    let restart = document.getElementById("restart_href");
+    restart.href = `/centralized-testing-training/${subject}`;
+    restart.style.visibility = "initial";
+    document.getElementById("header").onclick = function (event) {
+        alert(event.target.id)
+        if (event.target.closest("#restart_href")) {
+            localStorage.removeItem(`${subject}_questions`);
+            localStorage.removeItem(`${subject}_current_question_num`);
+            window.removeEventListener("beforeunload", setStorage);
+        }
+    }
 }

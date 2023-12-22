@@ -1,27 +1,45 @@
+let subject;
 let data = [];
 let questions = [];
 let currentQuestionNum = 0;
 let rightAnswerNum = 0;
 
-function startQuestions(data1) {
+function startQuestions(name, data1) {
+    subject = name;
     data = data1;
-    hideQuestionSection();
-    setTopicData();
 
-    for (let input of document.querySelectorAll(`input[name="topic_input"]`)) {
-        input.onchange = function () {
-            hideTopicSelectSection();
-            questions = data[Number(input.id.split("_")[1])]["questions"].slice();
-            shuffle(questions);
-            currentQuestionNum = 0;
-            setQuestion(questions[currentQuestionNum]);
-            showQuestionSection();
+    setRestartHref(name);
+
+    questions = JSON.parse(localStorage.getItem(`${subject}_questions`) ?? "[]");
+    if (questions.length !== 0) {
+        hideTopicSelectSection();
+        currentQuestionNum = localStorage.getItem(`${subject}_current_question_num`);
+        setQuestion(questions[currentQuestionNum]);
+        showQuestionSection();
+    } else {
+        hideQuestionSection();
+        setTopicData();
+
+        for (let input of document.querySelectorAll(`input[name="topic_input"]`)) {
+            input.onchange = function () {
+                hideTopicSelectSection();
+                questions = data[Number(input.id.split("_")[1])]["questions"].slice();
+                shuffle(questions);
+                currentQuestionNum = 0;
+                setQuestion(questions[currentQuestionNum]);
+                showQuestionSection();
+            }
         }
     }
-
     document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
+
+    window.addEventListener("beforeunload", setStorage);
 }
 
+function setStorage() {
+    localStorage.setItem(`${subject}_questions`, JSON.stringify(questions));
+    localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
+}
 
 function addTopic(name, num) {
     document.getElementById("topic_select").innerHTML += `
@@ -104,7 +122,6 @@ function addInputListeners() {
         label.onclick = function () {
             for (let label1 of document.querySelectorAll("main > section > div > label")) {
                 if (label1.classList.contains("selected")) label1.classList.remove("selected")
-
             }
             label.classList.add("selected");
         }
