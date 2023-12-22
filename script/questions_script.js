@@ -3,6 +3,7 @@ let data = [];
 let questions = [];
 let currentQuestionNum = 0;
 let rightAnswerNum = 0;
+let rightAnswersCount = 0;
 
 function startQuestions(name, data1) {
     subject = name;
@@ -13,9 +14,14 @@ function startQuestions(name, data1) {
     questions = JSON.parse(localStorage.getItem(`${subject}_questions`) ?? "[]");
     if (questions.length !== 0) {
         hideTopicSelectSection();
-        currentQuestionNum = localStorage.getItem(`${subject}_current_question_num`);
+        currentQuestionNum = Number(localStorage.getItem(`${subject}_current_question_num`) ?? 0);
+        rightAnswersCount = Number(localStorage.getItem(`${subject}_right_answers_count`) ?? 0);
         setQuestion(questions[currentQuestionNum]);
         showQuestionSection();
+        document.getElementById("all_count").textContent = questions.length.toString();
+        document.getElementById("completed_count").textContent = currentQuestionNum;
+        document.getElementById("right_count").textContent = rightAnswersCount.toString();
+        document.getElementById("not_right_count").textContent = (currentQuestionNum - rightAnswersCount).toString();
     } else {
         hideQuestionSection();
         setTopicData();
@@ -33,10 +39,12 @@ function startQuestions(name, data1) {
             showQuestionSection();
             localStorage.setItem(`${subject}_questions`, JSON.stringify(questions));
             localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
+            document.getElementById("all_count").textContent = questions.length.toString();
         }
     }
     document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
 }
+
 
 function addTopic(name, num) {
     document.getElementById("topic_select").innerHTML += `
@@ -64,6 +72,7 @@ function hideQuestionSection() {
 
 function showQuestionSection() {
     document.getElementById("question_section").style.display = "flex";
+    document.getElementById("status_bar").style.display = "flex";
 }
 
 function addAnswer(text, num) {
@@ -134,18 +143,23 @@ function setAnswerButtonAnsState() {
     if (ans === rightAnswerNum) {
         document.getElementById("question_head").textContent = `Правильно!`;
         document.getElementById("question_section").style.backgroundColor = "var(--md-sys-color-tertiary-container)";
+        rightAnswersCount++;
+        document.getElementById("right_count").textContent = rightAnswersCount.toString();
+        localStorage.setItem(`${subject}_right_answers_count`, rightAnswersCount.toString());
     } else if (ans === -1) {
         alert("Выберите ответ!");
         return;
     } else {
         document.getElementById("question_head").textContent = `Неправильно!`;
         document.getElementById("question_section").style.backgroundColor = "var(--md-sys-color-error-container)";
+        document.getElementById("not_right_count").textContent = (currentQuestionNum + 1 - rightAnswersCount).toString();
     }
     removeInputListeners();
     document.getElementById(`answer_${rightAnswerNum}`).nextElementSibling.classList.add("right");
     document.getElementById("answer_select_button").innerHTML = "Следующий<span></span>";
     document.getElementById("answer_select_button").onclick = setAnswerButtonNextState;
     currentQuestionNum++;
+    document.getElementById("completed_count").textContent = currentQuestionNum;
     localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
 }
 
@@ -154,6 +168,7 @@ function setAnswerButtonNextState() {
         setQuestion(questions[currentQuestionNum]);
     } else {
         alert("Все вопросы пройдены!");
+        cleanStorage();
         window.location.href = "";
         hideQuestionSection();
         setTopicData();
@@ -173,4 +188,11 @@ function getTopicInputsQuestions() {
         }
     }
     return res;
+}
+
+function cleanStorage() {
+    localStorage.removeItem(`${subject}_questions`);
+    localStorage.removeItem(`${subject}_current_question_num`);
+    localStorage.removeItem(`${subject}_current_question_num`);
+    localStorage.removeItem(`${subject}_right_answers_count`);
 }

@@ -1,4 +1,8 @@
 document.querySelector("main").innerHTML += `
+    <div id="status_bar">
+        <p>Правильно/неправильно: <b id="right_count">0</b>/<b id="not_right_count">0</b></p>
+        <p>Пройдено: <b id="completed_count">0</b>/<b id="all_count">0</b></p>
+    </div>
     <section id="topic_select_section" class="question_section">
         <h2>Выберите тему:</h2>
         <div id="topic_select"></div>

@@ -16,8 +16,7 @@ function setRestartHref(subject) {
     restart.style.visibility = "initial";
     document.getElementById("header").onclick = function (event) {
         if (event.target.closest("#restart_href")) {
-            localStorage.removeItem(`${subject}_questions`);
-            localStorage.removeItem(`${subject}_current_question_num`);
+            cleanStorage();
         }
     }
 }
