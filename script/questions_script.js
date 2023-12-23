@@ -237,7 +237,7 @@ function getTopicInputsQuestions() {
 function cleanStorage() {
     localStorage.removeItem(`${subject}_questions`);
     localStorage.removeItem(`${subject}_current_question_num`);
-    localStorage.removeItem(`${subject}_current_question_num`);
+    localStorage.removeItem(`${subject}_completed_count`);
     localStorage.removeItem(`${subject}_right_answers_count`);
 }
 

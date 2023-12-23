@@ -286,6 +286,11 @@ section {
 }
 
 @media (max-width: 850px) {
+
+    section {
+        width: 95%;
+    }
+
     #questions_main_div {
         margin: 10px;
         width: 95%;
@@ -296,6 +301,8 @@ section {
             margin-right: 0;
         }
     }
+
+
 
     #status_bar {
         width: 100%;

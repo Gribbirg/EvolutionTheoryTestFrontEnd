@@ -118,7 +118,7 @@ main {
     }
 
     #question_menu_div {
-        height: 1px;
+        height: 0;
         overflow: hidden;
         margin: 0;
         max-height: initial;
