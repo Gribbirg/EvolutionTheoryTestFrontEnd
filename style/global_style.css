@@ -39,6 +39,7 @@ section {
         display: inline;
         white-space: pre-line;
         overflow-wrap: break-word;
+        width: 100%;
     }
 }
 
