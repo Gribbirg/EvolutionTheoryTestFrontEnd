@@ -43,9 +43,11 @@ function startQuestions(name, data1) {
             localStorage.setItem(`${subject}_questions`, JSON.stringify(questions));
             localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
             document.getElementById("all_count").textContent = questions.length.toString();
+            addQuestionsMenu();
         }
     }
     setQuestionChangeButtonsListeners();
+    addQuestionsMenu();
 }
 
 
@@ -249,4 +251,31 @@ function setQuestionChangeButtonsListeners() {
         currentQuestionNum++;
         setQuestion(questions[currentQuestionNum]);
     }
+}
+
+function addQuestionsMenu() {
+    for (let i = 0; i < questions.length; i++) {
+        let ans = questions[i]["user_answer"];
+        addQuestionToMenu(i, (ans === undefined)? ans : ans === 0);
+    }
+}
+
+function addQuestionToMenu(num, right = undefined) {
+    let button = document.createElement("button");
+
+    button.id = `${num}-menu_element`
+    button.textContent = (num + 1);
+    button.className = "menu_element";
+
+    if (right === true)
+        button.classList.add("right_menu_element");
+    else if (right === false)
+        button.classList.add("not_right_menu_element");
+
+    button.onclick = function () {
+        currentQuestionNum = Number(button.id.split("-")[0]);
+        setQuestion(questions[currentQuestionNum]);
+    }
+
+    document.getElementById("question_menu_div").appendChild(button);
 }

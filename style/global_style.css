@@ -167,7 +167,6 @@ section {
         bottom: 15px;
         height: 50px;
         box-shadow: 2px 2px 15px var(--md-sys-color-shadow);
-        align-self: end;
     }
 }
 
@@ -227,6 +226,7 @@ section {
 
 #status_bar {
     width: 800px;
+    margin: 10px;
     height: fit-content;
     background-color: var(--md-sys-color-secondary-container);
     border-radius: 10px;
