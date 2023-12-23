@@ -20,6 +20,15 @@ main {
     flex-flow: row wrap;
     padding: 0;
     justify-content: center;
+
+    > input {
+        position: absolute;
+        visibility: hidden;
+    }
+
+    > input:checked + label {
+        outline: var(--md-sys-color-on-surface) 2px solid;
+    }
 }
 
 .menu_element {
@@ -31,7 +40,26 @@ main {
     background-color: var(--md-sys-color-secondary-container);
     border: var(--md-sys-color-outline) 1px solid;
     color: var(--md-sys-color-on-secondary-container);
+    transition: background-color 400ms, color 400ms, box-shadow 400ms;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
+.menu_element:hover {
+    box-shadow: 1px 1px 8px var(--md-sys-color-shadow);
+    background-color: var(--md-sys-color-primary-container);
 }
 
 .right_menu_element {
+    background-color: var(--md-sys-color-tertiary-container);
+    color: var(--md-sys-color-on-tertiary-container);
+}
+
+.not_right_menu_element {
+    background-color: var(--md-sys-color-error-container);
+    color: var(--md-sys-color-on-error-container);
 }

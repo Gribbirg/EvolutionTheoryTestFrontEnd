@@ -16,6 +16,7 @@ function startQuestions(name, data1) {
     questions = JSON.parse(localStorage.getItem(`${subject}_questions`) ?? "[]");
     if (questions.length !== 0) {
         hideTopicSelectSection();
+        addQuestionsMenu();
         currentQuestionNum = Number(localStorage.getItem(`${subject}_current_question_num`) ?? 0);
         rightAnswersCount = Number(localStorage.getItem(`${subject}_right_answers_count`) ?? 0);
         completedCount = Number(localStorage.getItem(`${subject}_completed_count`) ?? 0);
@@ -31,6 +32,7 @@ function startQuestions(name, data1) {
 
         document.getElementById("topic_select_button").onclick = function () {
             questions = getTopicInputsQuestions();
+            addQuestionsMenu();
             if (questions.length === 0) {
                 alert("Выберите темы!");
                 return;
@@ -47,7 +49,6 @@ function startQuestions(name, data1) {
         }
     }
     setQuestionChangeButtonsListeners();
-    addQuestionsMenu();
 }
 
 
@@ -124,6 +125,7 @@ function setQuestion(question) {
     }
 
     setQuestionChangeButtonsState();
+    document.getElementById(`${currentQuestionNum}-menu_element`).checked = true;
 }
 
 function findInAnswers(stockIndex) {
@@ -153,6 +155,7 @@ function setRightSectionState(right = undefined) {
     } else {
         document.getElementById("question_head").textContent = (right) ? `Правильно!` : `Неправильно!`;
         document.getElementById("question_section").style.backgroundColor = (right) ? "var(--md-sys-color-tertiary-container)" : "var(--md-sys-color-error-container)";
+        document.querySelector(`label[for="${currentQuestionNum}-menu_element"]`).classList.add((right)? "right_menu_element" : "not_right_menu_element");
         document.getElementById("answer_select_button").innerHTML = "Следующий<span></span>";
         document.getElementById("answer_select_button").onclick = setAnswerButtonNextState;
         document.querySelectorAll(`input[name="answer_input"]`).forEach(function (item) {
@@ -261,21 +264,27 @@ function addQuestionsMenu() {
 }
 
 function addQuestionToMenu(num, right = undefined) {
-    let button = document.createElement("button");
+    let input = document.createElement("input");
+    let label = document.createElement("label");
 
-    button.id = `${num}-menu_element`
-    button.textContent = (num + 1);
-    button.className = "menu_element";
+    input.id = `${num}-menu_element`;
+    input.type = "radio";
+    input.name = "question_menu_element";
+    document.getElementById("question_menu_div").appendChild(input);
 
+    label.htmlFor = `${num}-menu_element`;
+    label.textContent = (num + 1);
+    label.className = "menu_element";
     if (right === true)
-        button.classList.add("right_menu_element");
+        label.classList.add("right_menu_element");
     else if (right === false)
-        button.classList.add("not_right_menu_element");
+        label.classList.add("not_right_menu_element");
+    document.getElementById("question_menu_div").appendChild(label);
 
-    button.onclick = function () {
-        currentQuestionNum = Number(button.id.split("-")[0]);
-        setQuestion(questions[currentQuestionNum]);
+    input.onchange = function () {
+        if (input.checked) {
+            currentQuestionNum = Number(input.id.split("-")[0]);
+            setQuestion(questions[currentQuestionNum]);
+        }
     }
-
-    document.getElementById("question_menu_div").appendChild(button);
 }

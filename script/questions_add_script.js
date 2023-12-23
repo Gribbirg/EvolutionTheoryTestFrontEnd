@@ -1,4 +1,10 @@
 document.querySelector("main").innerHTML += `
+    <section id="question_menu_section">
+        <h2>Вопросы:</h2>
+        <div id="question_menu_div">
+        
+        </div>
+    </section>
     <div id="questions_main_div">
     <div id="status_bar">
         <p>Правильно/неправильно: <b id="right_count">0</b>/<b id="not_right_count">0</b></p>
@@ -21,10 +27,4 @@ document.querySelector("main").innerHTML += `
         <div id="answer_select"></div>
         <button id="answer_select_button" class="arrow_button">Ответить<span></span></button>
     </section>
-    </div>
-    <section id="question_menu_section">
-        <h2>Вопросы:</h2>
-        <div id="question_menu_div">
-        
-        </div>
-    </section>`
+    </div>`
