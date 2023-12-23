@@ -3,15 +3,22 @@ main {
     flex-flow: row nowrap;
     align-items: flex-start;
     justify-content: space-around;
+    position: relative;
 }
 
 #question_menu_section {
-    order: -1;
-    display: flex;
+    display: none;
+    /*display: flex;*/
     flex-flow: column nowrap;
     align-items: center;
     background-color: var(--md-sys-color-secondary-container);
     box-shadow: none;
+    width: 400px;
+    max-height: calc(100vh - 90px);
+    justify-self: start;
+    position: relative;
+    margin: 10px 10px 0;
+    padding: 0;
 }
 
 #question_menu_div {
@@ -20,6 +27,9 @@ main {
     flex-flow: row wrap;
     padding: 0;
     justify-content: center;
+    overflow: auto;
+    /*transition: all 400ms;*/
+    /*overflow: visible;*/
 
     > input {
         position: absolute;
@@ -62,4 +72,65 @@ main {
 .not_right_menu_element {
     background-color: var(--md-sys-color-error-container);
     color: var(--md-sys-color-on-error-container);
+}
+
+#show_menu_input {
+    position: absolute;
+    visibility: hidden;
+}
+
+#show_menu_input + label {
+    display: none;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 2rem;
+    /*background-color: #1a1c1e;*/
+    width: 3rem;
+    height: 3rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    transition: rotate 400ms;
+    color: var(--md-sys-color-on-surface-variant);
+    user-select: none;
+}
+
+#show_menu_input:checked + label {
+    rotate: 180deg;
+}
+
+#show_menu_input:checked + label + div {
+    height: fit-content;
+    margin: 0 10px 10px;
+}
+
+@media (max-width: 1300px) {
+    main {
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    #question_menu_section {
+        width: 800px;
+        max-height: initial;
+    }
+
+    #question_menu_div {
+        height: 1px;
+        overflow: hidden;
+        margin: 0;
+        max-height: initial;
+    }
+
+    #show_menu_input + label {
+        display: flex;
+    }
+}
+
+@media (max-width: 850px) {
+    #question_menu_section {
+        width: 95%;
+    }
 }

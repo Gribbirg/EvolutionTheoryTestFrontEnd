@@ -45,7 +45,6 @@ function startQuestions(name, data1) {
             localStorage.setItem(`${subject}_questions`, JSON.stringify(questions));
             localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
             document.getElementById("all_count").textContent = questions.length.toString();
-            addQuestionsMenu();
         }
     }
     setQuestionChangeButtonsListeners();
@@ -79,6 +78,7 @@ function hideQuestionSection() {
 function showQuestionSection() {
     document.getElementById("question_section").style.display = "flex";
     document.getElementById("status_bar").style.display = "flex";
+    document.getElementById("question_menu_section").style.display = "flex";
 }
 
 function addAnswer(text, num) {
@@ -126,6 +126,7 @@ function setQuestion(question) {
 
     setQuestionChangeButtonsState();
     document.getElementById(`${currentQuestionNum}-menu_element`).checked = true;
+    document.getElementById("questions_main_div_position").scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
 function findInAnswers(stockIndex) {
@@ -190,6 +191,7 @@ function setAnswerButtonAnsState() {
     completedCount++;
     document.getElementById("completed_count").textContent = completedCount;
     localStorage.setItem(`${subject}_completed_count`, completedCount);
+    document.getElementById("questions_main_div_position").scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
 function setAnswerButtonNextState() {

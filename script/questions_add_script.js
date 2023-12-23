@@ -1,11 +1,13 @@
 document.querySelector("main").innerHTML += `
     <section id="question_menu_section">
         <h2>Вопросы:</h2>
+        <input type="checkbox" id="show_menu_input" name="show_menu_input"><label for="show_menu_input" class="question_change_button">⇩</label>
         <div id="question_menu_div">
         
         </div>
     </section>
     <div id="questions_main_div">
+    <b id="questions_main_div_position" class="position_element"></b>
     <div id="status_bar">
         <p>Правильно/неправильно: <b id="right_count">0</b>/<b id="not_right_count">0</b></p>
         <p>№ <b id="question_number">0</b></p>
