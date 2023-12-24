@@ -39,6 +39,10 @@
     }
 }
 
+#news_section {
+    background-color: var(--md-sys-color-secondary-container);
+}
+
 #news_div {
     border-radius: 10px;
     position: relative;

@@ -283,6 +283,7 @@ section {
 
 #questions_main_div {
     position: relative;
+    min-height: calc(100vh - 60px);
 }
 
 @media (max-width: 850px) {

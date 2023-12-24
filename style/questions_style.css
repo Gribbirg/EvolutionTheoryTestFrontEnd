@@ -12,7 +12,7 @@ main {
     flex-flow: column nowrap;
     align-items: center;
     background-color: var(--md-sys-color-secondary-container);
-    box-shadow: none;
+    /*box-shadow: none;*/
     width: 400px;
     max-height: calc(100vh - 90px);
     justify-self: start;
