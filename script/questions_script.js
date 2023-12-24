@@ -116,6 +116,7 @@ function setQuestion(question) {
     if (img)
         img.style.display = "none";
     if (question["image"]) {
+        img.src = "";
         img.src = `../images/chemistry/${question["image"]}`;
         img.alt = `${question["image"]}`;
         img.style.display = "block";
