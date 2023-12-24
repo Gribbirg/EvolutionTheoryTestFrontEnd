@@ -6,6 +6,11 @@ document.querySelector("main").innerHTML += `
         
         </div>
     </section>
+    <section id="test_start_section">
+        <h2>Тестирование</h2>
+        <p>30 вопросов</p>
+        <button id="test_start_button" class="arrow_button">Запуск<span></span></button>
+    </section>
     <div id="questions_main_div">
     <b id="questions_main_div_position" class="position_element"></b>
     <div id="status_bar">

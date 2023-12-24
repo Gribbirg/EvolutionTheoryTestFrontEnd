@@ -129,6 +129,51 @@ main {
     }
 }
 
+#test_start_section {
+    display: grid;
+    grid: fit-content(100%) fit-content(100%) / 1fr 1fr;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-areas: "head head" "description button";
+    background-color: var(--md-sys-color-tertiary-container);
+
+    > h2 {
+        grid-area: head;
+        text-align: center;
+    }
+
+    > p {
+        grid-area: description;
+        text-align: center;
+    }
+
+    > button {
+        grid-area: button;
+        justify-self: flex-end;
+        align-self: flex-end;
+    }
+}
+
+#test_start_button {
+    width: 150px;
+    height: 30px;
+    margin: 10px;
+}
+
+@media (max-width: 400px) {
+    #test_start_section {
+
+    }
+
+    #test_start_button {
+        width: 100px;
+        height: 50px;
+        margin: 5px;
+    }
+}
+
 @media (max-width: 850px) {
     #question_menu_section {
         width: 95%;

@@ -32,22 +32,31 @@ function startQuestions(name, data1) {
 
         document.getElementById("topic_select_button").onclick = function () {
             questions = getTopicInputsQuestions();
-            addQuestionsMenu();
             if (questions.length === 0) {
                 alert("Выберите темы!");
                 return;
             }
-            hideTopicSelectSection();
             shuffle(questions);
-            currentQuestionNum = 0;
-            setQuestion(questions[currentQuestionNum]);
-            showQuestionSection();
-            localStorage.setItem(`${subject}_questions`, JSON.stringify(questions));
-            localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
-            document.getElementById("all_count").textContent = questions.length.toString();
+            questionsStart();
+        }
+
+        document.getElementById("test_start_button").onclick = function () {
+            questions = getRandomQuestions(30);
+            questionsStart();
         }
     }
     setQuestionChangeButtonsListeners();
+}
+
+function questionsStart() {
+    addQuestionsMenu();
+    hideTopicSelectSection();
+    currentQuestionNum = 0;
+    setQuestion(questions[currentQuestionNum]);
+    showQuestionSection();
+    localStorage.setItem(`${subject}_questions`, JSON.stringify(questions));
+    localStorage.setItem(`${subject}_current_question_num`, currentQuestionNum);
+    document.getElementById("all_count").textContent = questions.length.toString();
 }
 
 
@@ -65,14 +74,18 @@ function setTopicData() {
 
 function hideTopicSelectSection() {
     document.getElementById("topic_select_section").style.display = "none";
+    document.getElementById("test_start_section").style.display = "none";
 }
 
 function showTopicSelectSection() {
     document.getElementById("topic_select_section").style.display = "flex";
+    document.getElementById("test_start_section").style.display = "grid";
 }
 
 function hideQuestionSection() {
     document.getElementById("question_section").style.display = "none";
+    document.getElementById("status_bar").style.display = "none";
+    document.getElementById("question_menu_section").style.display = "none";
 }
 
 function showQuestionSection() {
@@ -289,4 +302,42 @@ function addQuestionToMenu(num, right = undefined) {
             setQuestion(questions[currentQuestionNum]);
         }
     }
+}
+
+function getRandomQuestions(count) {
+    let numbers = getRandomNumbers(count, getQuestionsCount());
+    let questions = [];
+    for (let num of numbers) {
+        let topicNum = 0;
+        while (num >= data[topicNum]["questions_count"]) {
+            num -= data[topicNum]["questions_count"];
+            topicNum++;
+        }
+        questions.push(data[topicNum]["questions"][num]);
+    }
+    return questions;
+}
+
+function getQuestionsCount() {
+    let sum = 0;
+    for (let topic of data) {
+        sum += topic["questions_count"];
+    }
+    return sum;
+}
+
+function getRandomNumbers(count, max) {
+    let numbers = [];
+    let num;
+    while (numbers.length < count) {
+        do {
+            num = getRandomInt(max);
+        } while (numbers.includes(num));
+        numbers.push(num);
+    }
+    return numbers;
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
 }
