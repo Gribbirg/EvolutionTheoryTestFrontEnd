@@ -181,12 +181,24 @@ section {
     height: 30px;
 }
 
+#answer_select_button {
+    position: sticky;
+    bottom: 15px;
+    height: 50px;
+    align-self: flex-end;
+    box-shadow: 2px 2px 15px var(--md-sys-color-shadow);
+}
+
 @media (max-width: 600px) {
-    #answer_select_button, #topic_select_button {
+    #topic_select_button {
         position: sticky;
         bottom: 15px;
         height: 50px;
         box-shadow: 2px 2px 15px var(--md-sys-color-shadow);
+    }
+
+    #answer_select_button {
+        align-self: center;
     }
 }
 
