@@ -224,11 +224,12 @@ function setAnswerButtonNextState() {
         }
         if (currentQuestionNum === questions.length) {
             alert("Все вопросы пройдены!");
-            cleanStorage();
-            window.location.href = "";
-            hideQuestionSection();
-            setTopicData();
-            showTopicSelectSection();
+            document.getElementById("answer_select_button").innerHTML = "Завершить<span></span>";
+            document.getElementById("answer_select_button").onclick = function () {
+                cleanStorage();
+                window.location.href = "";
+            }
+            return;
         }
     }
     document.getElementById("question_section").style.background = "var(--md-sys-color-surface-variant)";
