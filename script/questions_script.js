@@ -165,12 +165,18 @@ function setRightSectionState(right = undefined) {
         document.getElementById("question_section").style.background = "var(--md-sys-color-surface-variant)";
         document.getElementById("question_head").textContent = "Выберите ответ:";
         document.getElementById("answer_select_button").innerHTML = "Ответить<span></span>";
+        if (!window.matchMedia('(hover: hover)').matches) {
+            document.getElementById("answer_select_button").classList.remove("arrow_button_hover");
+        }
         document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
     } else {
         document.getElementById("question_head").textContent = (right) ? `Правильно!` : `Неправильно!`;
         document.getElementById("question_section").style.backgroundColor = (right) ? "var(--md-sys-color-tertiary-container)" : "var(--md-sys-color-error-container)";
         document.querySelector(`label[for="${currentQuestionNum}-menu_element"]`).classList.add((right)? "right_menu_element" : "not_right_menu_element");
         document.getElementById("answer_select_button").innerHTML = "Следующий<span></span>";
+        if (!window.matchMedia('(hover: hover)').matches) {
+            document.getElementById("answer_select_button").classList.add("arrow_button_hover");
+        }
         document.getElementById("answer_select_button").onclick = setAnswerButtonNextState;
         document.querySelectorAll(`input[name="answer_input"]`).forEach(function (item) {
             item.disabled = true;
@@ -232,10 +238,7 @@ function setAnswerButtonNextState() {
             return;
         }
     }
-    document.getElementById("question_section").style.background = "var(--md-sys-color-surface-variant)";
-    document.getElementById("question_head").textContent = "Выберите ответ:";
-    document.getElementById("answer_select_button").innerHTML = "Ответить<span></span>";
-    document.getElementById("answer_select_button").onclick = setAnswerButtonAnsState;
+    setRightSectionState();
 }
 
 function getTopicInputsQuestions() {

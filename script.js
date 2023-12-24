@@ -16,5 +16,5 @@ function createNews(news) {
 }
 
 function initNews(data) {
-    data.forEach(createNews);
+    data.slice(0, 5).forEach(createNews);
 }

@@ -70,7 +70,24 @@ section {
     }
 }
 
-.arrow_button:hover {
+@media (hover: hover) {
+    .arrow_button:hover {
+        background-color: var(--md-sys-color-tertiary);
+        color: var(--md-sys-color-on-tertiary);
+
+        > span {
+            padding-right: 25px;
+        }
+
+        > span::after {
+            color: var(--md-sys-color-on-tertiary);
+            opacity: 1;
+            right: 0;
+        }
+    }
+}
+
+.arrow_button_hover {
     background-color: var(--md-sys-color-tertiary);
     color: var(--md-sys-color-on-tertiary);
 
@@ -115,12 +132,15 @@ section {
             overflow-wrap: break-word;
         }
 
-        > input:not(:disabled) + label:hover, > a:hover {
-            background: var(--md-sys-color-tertiary-container);
-            /*color: var(--md-sys-color-on-tertiary-container);*/
-            box-shadow: 1px 1px 10px var(--md-sys-color-shadow);
-            /*outline: none;*/
+        @media (hover: hover) {
+            > input:not(:disabled) + label:hover, > a:hover {
+                background: var(--md-sys-color-tertiary-container);
+                /*color: var(--md-sys-color-on-tertiary-container);*/
+                box-shadow: 1px 1px 10px var(--md-sys-color-shadow);
+                /*outline: none;*/
+            }
         }
+
 
         > label::before {
             position: relative;
