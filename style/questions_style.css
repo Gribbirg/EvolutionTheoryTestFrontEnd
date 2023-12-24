@@ -144,11 +144,13 @@ main {
     > h2 {
         grid-area: head;
         text-align: center;
+        color: var(--md-sys-color-on-surface);
     }
 
     > p {
         grid-area: description;
         text-align: center;
+        color: var(--md-sys-color-on-tertiary-container);
     }
 
     > button {
