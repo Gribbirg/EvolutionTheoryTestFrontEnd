@@ -139,6 +139,7 @@ function setQuestion(question) {
 
     setQuestionChangeButtonsState();
     document.getElementById(`${currentQuestionNum}-menu_element`).checked = true;
+    if (completedCount === questions.length) setEndTestAnswerButtonState();
     document.getElementById("questions_main_div_position").scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
@@ -230,15 +231,19 @@ function setAnswerButtonNextState() {
         }
         if (currentQuestionNum === questions.length) {
             alert("Все вопросы пройдены!");
-            document.getElementById("answer_select_button").innerHTML = "Завершить<span></span>";
-            document.getElementById("answer_select_button").onclick = function () {
-                cleanStorage();
-                window.location.href = "";
-            }
+            setEndTestAnswerButtonState();
             return;
         }
     }
     setRightSectionState();
+}
+
+function setEndTestAnswerButtonState() {
+    document.getElementById("answer_select_button").innerHTML = "Завершить<span></span>";
+    document.getElementById("answer_select_button").onclick = function () {
+        cleanStorage();
+        window.location.href = "";
+    };
 }
 
 function getTopicInputsQuestions() {
