@@ -23,7 +23,7 @@ document.body.innerHTML += `
     </div>
     <address>
         Контакты разработчика:
-        <p>По поводу ошибок пишите на:</p>
+        <p><a href="tel:+79779456492">+7 (977) 945-64-92</a></p>
         <p>
             <a href="mailto:gribkovalexander@gmail.com?subject=Сайт для подготовки к ЦТ">gribkovalexander@gmail.com</a>
         </p>
