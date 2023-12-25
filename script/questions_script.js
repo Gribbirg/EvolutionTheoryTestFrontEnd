@@ -28,6 +28,7 @@ function startQuestions(name, data1) {
         document.getElementById("not_right_count").textContent = (completedCount - rightAnswersCount).toString();
     } else {
         hideQuestionSection();
+        showTopicSelectSection();
         setTopicData();
 
         document.getElementById("topic_select_button").onclick = function () {

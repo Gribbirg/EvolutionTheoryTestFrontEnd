@@ -6,6 +6,10 @@ main {
     position: relative;
 }
 
+#topic_select_section {
+    display: none;
+}
+
 #question_menu_section {
     display: none;
     /*display: flex;*/
@@ -132,7 +136,8 @@ main {
 }
 
 #test_start_section {
-    display: grid;
+    display: none;
+    /*display: grid;*/
     grid: fit-content(100%) fit-content(100%) / 1fr 1fr;
     justify-content: center;
     align-content: center;
