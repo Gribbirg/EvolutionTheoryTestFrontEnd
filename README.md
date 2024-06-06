@@ -1,5 +1,8 @@
 # Preparing for centralized testing
 
+[![en](https://img.shields.io/badge/lang-en-blue.svg)](README.md)
+[![ru](https://img.shields.io/badge/lang-ru-red.svg)](README.ru.md)
+
 Tasks from centralized testing of I.M. Sechenov First Moscow State Medical University (Sechenov University)
 (First Moscow State Medical University, Sechenov University).
 Assignments from an open bank in a form convenient for learning.
